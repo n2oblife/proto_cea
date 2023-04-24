@@ -1,2 +1,6 @@
 # Ignoring the cache and datasets from Universal Dependency
 ./cache/*
+
+./.vscode/*
+
+*__pycache__*
