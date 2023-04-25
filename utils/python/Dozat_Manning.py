@@ -13,7 +13,7 @@ class DeepBiaffineDecoder(nn.Module):
         self.includes_roots = input_includes_roots
         self.in_dim = input_in_dim
         self.hidden_arc_dim = input_hidden_arc_dim
-        self.elu = nn.ELU
+        self.elu = nn.functional.elu
         # design of the model
         self.mlp_head = nn.Linear(self.in_dim,self.hidden_arc_dim)
         self.mlp_dep = nn.Linear(self.in_dim, self.hidden_arc_dim)
@@ -53,9 +53,6 @@ class DeepBiaffineDecoder(nn.Module):
             roots = self.root.tile(( batch_size, 1, 1 ))
             roots = roots.view(roots.size(0), -1)  # Reshape to match dimensionality
             arc_dep = self.elu(torch.cat(( roots, self.mlp_dep(tokens) ), 1))
-        
-        arc_head = torch.tensor(arc_head)
-        arc_dep = torch.tensor(arc_dep)
 
         W = torch.matmul(arc_head, self.U1)
         b = torch.matmul(arc_head, self.u2.tile(( 1, arc_head.shape(1) )))

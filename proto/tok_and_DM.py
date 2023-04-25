@@ -24,3 +24,5 @@ class tok_and_DM(nn.Module):
         output = self.tokenizer(input, padding= 'max_length')
         output = self.DM(output["input_ids"])
         return output
+    
+
