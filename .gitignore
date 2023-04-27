@@ -1,4 +1,4 @@
 cache
-.vscode/*
-*/__pycache__/*
-save_dir/
+.vscode
+utils/python/__pycache__
+save_dir

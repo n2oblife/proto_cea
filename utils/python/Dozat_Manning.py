@@ -1,7 +1,7 @@
 import torch 
 import torch.nn as nn
 
-# Model definition
+# Model definition (inutile puisque disponible sur trankit)
 
 class DeepBiaffineDecoder(nn.Module):
     def __init__(self, input_in_dim:int, input_hidden_arc_dim:int, input_includes_roots:bool = False) -> nn.Module:
@@ -17,6 +17,7 @@ class DeepBiaffineDecoder(nn.Module):
         # design of the model
         self.mlp_head = nn.Linear(self.in_dim,self.hidden_arc_dim)
         self.mlp_dep = nn.Linear(self.in_dim, self.hidden_arc_dim)
+        nn.Dropout(0.3)
 
         self.U1 = torch.empty(self.hidden_arc_dim, self.hidden_arc_dim)
         self.u2 = torch.empty(self.hidden_arc_dim,1)
@@ -26,6 +27,7 @@ class DeepBiaffineDecoder(nn.Module):
         nn.init.xavier_uniform_(self.u2)
         nn.init.xavier_uniform_(self.root)
         nn.init.xavier_uniform_(self.root2)
+
 
 
     def forward(self, input: torch.tensor):

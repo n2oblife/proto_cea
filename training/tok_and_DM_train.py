@@ -1,6 +1,3 @@
-import sys
-sys.path.append('/home/zk274707/Projet/protos')
-
 import torch
 import torch.nn as nn
 from proto.tok_and_DM import tok_and_DM
