@@ -6,17 +6,20 @@ import trankit.models.base_models as base_models
 import trankit.config as conf
 
 
-tokenizer = NllbTokenizer.from_pretrained("facebook/nllb-200-distilled-600M")
+#tokenizer = NllbTokenizer.from_pretrained("facebook/nllb-200-distilled-600M")
+tok_path = '/home/zk274707/Projet/proto_cea/save_dir/HG/nllb_tok.pt'
+tokenizer = torch.load(tok_path)
 
-#print(tokenizer.model_max_length)
+print(tokenizer.model_max_length)
 
 #my_var = NllbTokenizer.max_len_single_sentence
 
 
-
+print('start tokenization')
 batch_sentences_list = ["Hello I'm a single sentence.", "And another sentence.", "And the very very last one"]
 batch_sentences_str = "Hello I'm a single sentence. And another sentence. And the very very last one"
 docu = tokenizer(batch_sentences_list, padding = 'max_length')
+print('end tokenization')
 
 print(docu.keys())
 
