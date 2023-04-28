@@ -5,6 +5,10 @@ from trankit import Pipeline, TPipeline
 import trankit.models.base_models as base_models
 import trankit.config as conf
 
+main_loc_path = '/home/zk274707/Projet/'
+main_factoryAI_path = '/home/users/zkanit/'
+
+print(torch.cuda.is_available())
 
 #tokenizer = NllbTokenizer.from_pretrained("facebook/nllb-200-distilled-600M")
 tok_path = '/home/zk274707/Projet/proto_cea/save_dir/HG/nllb_tok.pt'
@@ -36,15 +40,13 @@ DB = base_models.Deep_Biaffine(tokenizer.model_max_length, # input dimmension is
 
 # = torch.tensor(docu) # need to use the get tagger from the base model and ecode_words function
 
-main_loc_path = '/home/zk274707/Projet/datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/'
-main_factoryAI_path = '/home/users/zkanit/datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/'
 
 training_config={
     #'category': 'customized-mwt-ner', # pipeline category
     'task': 'posdep', # task name
     'save_dir': './save_dir', # directory for saving trained model
-    'train_conllu_fpath': main_factoryAI_path+'en_ewt-ud-train.conllu', # annotations file in CONLLU format  for training
-    'dev_conllu_fpath': main_factoryAI_path+'en_ewt-ud-dev.conllu', # annotations file in CONLLU format for development
+    'train_conllu_fpath': main_factoryAI_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-train.conllu', # annotations file in CONLLU format  for training
+    'dev_conllu_fpath': main_factoryAI_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-dev.conllu', # annotations file in CONLLU format for development
     'gpu' : False,
     }
 
