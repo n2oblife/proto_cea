@@ -11,7 +11,7 @@ main_factoryAI_path = '/home/users/zkanit/'
 print(torch.cuda.is_available())
 
 #tokenizer = NllbTokenizer.from_pretrained("facebook/nllb-200-distilled-600M")
-tok_path = '/home/zk274707/Projet/proto_cea/save_dir/HG/nllb_tok.pt'
+tok_path = main_factoryAI_path+'proto_cea/save_dir/HG/nllb_tok.pt'
 tokenizer = torch.load(tok_path)
 
 print(tokenizer.model_max_length)
