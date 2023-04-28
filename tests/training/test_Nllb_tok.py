@@ -11,7 +11,7 @@ main_factoryAI_path = '/home/users/zkanit/'
 print(torch.cuda.is_available())
 
 #tokenizer = NllbTokenizer.from_pretrained("facebook/nllb-200-distilled-600M")
-tok_path = main_factoryAI_path+'proto_cea/save_dir/HG/nllb_tok.pt'
+tok_path = '../save_dir/HG/nllb_tok.pt'
 tokenizer = torch.load(tok_path)
 
 print(tokenizer.model_max_length)
@@ -44,10 +44,10 @@ DB = base_models.Deep_Biaffine(tokenizer.model_max_length, # input dimmension is
 training_config={
     #'category': 'customized-mwt-ner', # pipeline category
     'task': 'posdep', # task name
-    'save_dir': './save_dir', # directory for saving trained model
+    'save_dir': '../save_dir', # directory for saving trained model
+    #'gpu' : False,
     'train_conllu_fpath': main_factoryAI_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-train.conllu', # annotations file in CONLLU format  for training
-    'dev_conllu_fpath': main_factoryAI_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-dev.conllu', # annotations file in CONLLU format for development
-    'gpu' : False,
+    'dev_conllu_fpath': main_factoryAI_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-dev.conllu' # annotations file in CONLLU format for development
     }
 
 # initialize a trainer for the task
