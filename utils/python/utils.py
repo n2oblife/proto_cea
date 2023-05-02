@@ -7,11 +7,10 @@ import torch
 import torch.nn as nn
 from collections import OrderedDict
 
-import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 import torch.optim as optim
 
-def get_var_from_memory(var : any):
+def get_var_from_memory(var : any) -> any:
     '''Not always working'''
     # Get the memory address of the variable
     var_address = id(var)
@@ -24,3 +23,13 @@ def get_var_from_memory(var : any):
 
     # Access the variable using its name in the namespace
     return namespace["var"]
+
+def adapt_nllb_to_trankit(batch:list) -> list:
+    '''Adapt the batch from the output of the Nllb tokenizer to be usable by the trankit dep parser'''
+    # complete batch avec le word lens
+    pieces = [[p for p in self.wordpiece_splitter.tokenize(w) if p != '▁'] for w in words]
+    for ps in pieces:
+        if len(ps) == 0:
+            ps += ['-']
+    word_lens = [len(x) for x in pieces]
+    return word_lens

@@ -1,2 +1,4 @@
 .vscode
 env_proto
+utils/python/__pycache__
+proto/__pycache__
