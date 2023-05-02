@@ -43,11 +43,11 @@ DB = base_models.Deep_Biaffine(tokenizer.model_max_length, # input dimmension is
                        tokenizer.model_max_length,
                        input_hidden_arc_dim,
                        UD_n_labels)
-in_ids = torch.tensor(docu['input_ids'])
-print(in_ids.dtype)
-att_mask = torch.tensor(docu['attention_mask'])
-print(att_mask.dtype)
-print(DB(in_ids, att_mask))
+in_ids = torch.tensor(docu['input_ids']).to(torch.float) #il faut convertir car int mais les types de DB sont des floats
+print(in_ids.shape)
+att_mask = torch.tensor(docu['attention_mask']).to(torch.float)
+print(att_mask.shape)
+print(DB(in_ids, att_mask)) # pb de taille des matrices au moment du calcul de g1_w pour Deep Biafffine
 
 # = torch.tensor(docu) # need to use the get tagger from the base model and ecode_words function
 

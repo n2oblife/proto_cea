@@ -30,6 +30,6 @@ nlb_tokenizer = torch.load(path_to_toks+'nllb_tok.pt')
 xlm_tokenizer = torch.load(path_to_toks+'xml_roberta_tok.pt')
 
 
-# emb = base_models.Multilingual_Embedding(config=configuration)
-# output = emb.get_tagger_inputs(batch_sentences_str)
-# print(output)
+emb = base_models.Multilingual_Embedding(config=configuration)
+output = emb.get_tagger_inputs(batch_sentences_str)
+print(output)
