@@ -1,5 +1,6 @@
 import sys
-sys.path.insert(1, '/home/zk274707/Projet/proto/')
+if not(torch.cuda.is_available()) :
+    sys.path.insert(1, '/home/zk274707/Projet/proto/')
 import os
 import torch
 from transformers import NllbTokenizer
@@ -56,9 +57,9 @@ training_config={
     'category': 'customized', # pipeline category
     'task': 'posdep', # task name
     'save_dir': '../proto_utils/save_dir', # directory for saving trained model
-    'gpu' : False,
-    'train_conllu_fpath': main_loc_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-train.conllu', # annotations file in CONLLU format  for training
-    'dev_conllu_fpath': main_loc_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-dev.conllu' # annotations file in CONLLU format for development
+    'gpu' : torch.cuda.is_available(),
+    'train_conllu_fpath': main_factoryAI_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-train.conllu', # annotations file in CONLLU format  for training
+    'dev_conllu_fpath': main_factoryAI_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-dev.conllu' # annotations file in CONLLU format for development
     }
 
 # # initialize a trainer for the task
@@ -66,7 +67,7 @@ trainer = TPipeline(training_config)
 
 trainer.train()
 
-out = trainer(batch_sentences_str)
+print("---------------- Training DONE ---------------------------")
 
 # treebank = "auto"
 # pipe = Pipeline(lang=treebank)
