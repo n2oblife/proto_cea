@@ -1,8 +1,8 @@
 import sys
+import torch
 if not(torch.cuda.is_available()) :
     sys.path.insert(1, '/home/zk274707/Projet/proto/')
 import os
-import torch
 from transformers import NllbTokenizer
 from trankit import Pipeline, TPipeline
 import trankit.models.base_models as base_models
@@ -67,7 +67,7 @@ trainer = TPipeline(training_config)
 
 trainer.train()
 
-print("---------------- Training DONE ---------------------------")
+print("---------------- Training DONE ---------------------------t")
 
 # treebank = "auto"
 # pipe = Pipeline(lang=treebank)
