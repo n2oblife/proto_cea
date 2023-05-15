@@ -1,4 +1,7 @@
 .vscode
+build
+cache
+dist
 env_proto
 utils/python/__pycache__
 proto/__pycache__

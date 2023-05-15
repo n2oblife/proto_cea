@@ -19,17 +19,17 @@ batch_sentences_str = "Hello I'm a single sentence. And another sentence. And th
 configuration = conf.Config()
 configuration._cache_dir = '../proto_utils/cache/trankit/'
 
-pipe = Pipeline('auto', cache_dir='../proto_utils/cache/')
-posdep = pipe.posdep(batch_sentences_list, is_sent=True)
+pipe = Pipeline('english', cache_dir='../proto_utils/cache/')
+posdep = pipe.posdep(batch_sentences_str)
 print('pos dep of Trankit :',posdep)
 
 # revoir les chemins une fois sur factoryAI
 
-path_to_toks = '../proto_utils/save_dir/HG/'
-nlb_tokenizer = torch.load(path_to_toks+'nllb_tok.pt')
-xlm_tokenizer = torch.load(path_to_toks+'xml_roberta_tok.pt')
+# path_to_toks = '../proto_utils/save_dir/HG/'
+# nlb_tokenizer = torch.load(path_to_toks+'nllb_tok.pt')
+# xlm_tokenizer = torch.load(path_to_toks+'xml_roberta_tok.pt')
 
 
-emb = base_models.Multilingual_Embedding(config=configuration)
-output = emb.get_tagger_inputs(batch_sentences_str)
-print(output)
+# emb = base_models.Multilingual_Embedding(config=configuration)
+# output = emb.get_tagger_inputs(batch_sentences_str)
+# print(output)

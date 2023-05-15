@@ -25,11 +25,11 @@ print(tokenizer.model_max_length)
 batch_sentences_list = ["Hello I'm a single sentence.", "And another sentence.", "And the very very last one"]
 batch_sentences_str = "Hello I'm a single sentence. And another sentence. And the very very last one"
 # tokenized = tokenizer()
-docu = tokenizer(batch_sentences_list, padding = 'max_length')
+# docu = tokenizer(batch_sentences_list, padding = 'max_length')
 
 # docu.wordl_lens = adapt_nllb_to_trankit(docu)
 
-print(docu.keys())
+# print(docu.keys())
 
 # configuration = conf.Config()
 # configuration._cache_dir = '../proto_utils/cache/trankit/tpPipeline'
@@ -37,36 +37,36 @@ print(docu.keys())
 
 # pipe = Pipeline('auto') # Rq : 'gpu = False / dans le cas du taff sur cpu meme si ca marche pas
 
-input_hidden_arc_dim = 128
-UD_n_labels = 37 
-DB = base_models.Deep_Biaffine(tokenizer.model_max_length, # input dimmension is 1024 here
-                       tokenizer.model_max_length,
-                       input_hidden_arc_dim,
-                       UD_n_labels)
-in_ids = torch.tensor(docu['input_ids']).to(torch.float) #il faut convertir car int mais les types de DB sont des floats
-print(in_ids.shape)
-att_mask = torch.tensor(docu['attention_mask']).to(torch.float)
-print(att_mask.shape)
-print(DB(in_ids, att_mask)) # pb de taille des matrices au moment du calcul de g1_w pour Deep Biafffine
+# input_hidden_arc_dim = 128
+# UD_n_labels = 37 
+# DB = base_models.Deep_Biaffine(tokenizer.model_max_length, # input dimmension is 1024 here
+#                        tokenizer.model_max_length,
+#                        input_hidden_arc_dim,
+#                        UD_n_labels)
+# in_ids = torch.tensor(docu['input_ids']).to(torch.float) #il faut convertir car int mais les types de DB sont des floats
+# print(in_ids.shape)
+# att_mask = torch.tensor(docu['attention_mask']).to(torch.float)
+# print(att_mask.shape)
+# print(DB(in_ids, att_mask)) # pb de taille des matrices au moment du calcul de g1_w pour Deep Biafffine
 
 # = torch.tensor(docu) # need to use the get tagger from the base model and ecode_words function
 
 
-# training_config={
-#     #'category': 'customized-mwt-ner', # pipeline category
-#     'task': 'posdep', # task name
-#     'save_dir': '../proto_utils/save_dir', # directory for saving trained model
-#     #'gpu' : False,
-#     'train_conllu_fpath': main_factoryAI_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-train.conllu', # annotations file in CONLLU format  for training
-#     'dev_conllu_fpath': main_factoryAI_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-dev.conllu' # annotations file in CONLLU format for development
-#     }
+training_config={
+    'category': 'customized', # pipeline category
+    'task': 'posdep', # task name
+    'save_dir': '../proto_utils/save_dir', # directory for saving trained model
+    'gpu' : False,
+    'train_conllu_fpath': main_loc_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-train.conllu', # annotations file in CONLLU format  for training
+    'dev_conllu_fpath': main_loc_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-dev.conllu' # annotations file in CONLLU format for development
+    }
 
 # # initialize a trainer for the task
-# trainer = TPipeline(training_config)
+trainer = TPipeline(training_config)
 
-# trainer.train()
+trainer.train()
 
-#out = trainer(batch_sentences_str)
+out = trainer(batch_sentences_str)
 
 # treebank = "auto"
 # pipe = Pipeline(lang=treebank)

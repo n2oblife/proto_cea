@@ -1,0 +1,5 @@
+trankit.egg-info/PKG-INFO
+trankit.egg-info/SOURCES.txt
+trankit.egg-info/dependency_links.txt
+trankit.egg-info/requires.txt
+trankit.egg-info/top_level.txt
