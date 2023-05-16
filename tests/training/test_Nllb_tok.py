@@ -1,7 +1,9 @@
 import sys
+main_loc_path = '/home/zk274707/Projet/'
+main_factoryAI_path = '/home/users/zkanit/'
 import torch
 if not(torch.cuda.is_available()) :
-    sys.path.insert(1, '/home/zk274707/Projet/proto/')
+    sys.path.insert(1, main_factoryAI_path+'proto/')
 import os
 from transformers import NllbTokenizer
 from trankit import Pipeline, TPipeline
@@ -9,14 +11,12 @@ import trankit.models.base_models as base_models
 import trankit.config as conf
 from utils.python.utils import *
 
-main_loc_path = '/home/zk274707/Projet/'
-main_factoryAI_path = '/home/users/zkanit/proto_utils/'
 
 print('gpu available : ',torch.cuda.is_available())
 
 #tokenizer = NllbTokenizer.from_pretrained("facebook/nllb-200-distilled-600M")
 tok_path_factoryAI = '../proto_utils/save_dir/HG/'
-tokenizer = torch.load(tok_path_factoryAI+'nllb_tok.pt')
+tokenizer = torch.load(tok_path_factoryAI+'proto_utils/nllb_tok.pt')
 
 print(tokenizer.model_max_length)
 
@@ -58,8 +58,8 @@ training_config={
     'task': 'posdep', # task name
     'save_dir': '../proto_utils/save_dir', # directory for saving trained model
     'gpu' : torch.cuda.is_available(),
-    'train_conllu_fpath': main_factoryAI_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-train.conllu', # annotations file in CONLLU format  for training
-    'dev_conllu_fpath': main_factoryAI_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-dev.conllu' # annotations file in CONLLU format for development
+    'train_conllu_fpath': main_factoryAI_path+'proto_utils/datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-train.conllu', # annotations file in CONLLU format  for training
+    'dev_conllu_fpath': main_factoryAI_path+'proto_utils/datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-dev.conllu' # annotations file in CONLLU format for development
     }
 
 # # initialize a trainer for the task
