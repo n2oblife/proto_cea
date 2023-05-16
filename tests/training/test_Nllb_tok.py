@@ -2,6 +2,7 @@ import sys
 main_loc_path = '/home/zk274707/Projet/'
 main_factoryAI_path = '/home/users/zkanit/'
 import torch
+print('gpu available : ',torch.cuda.is_available())
 if not(torch.cuda.is_available()) :
     sys.path.insert(1, main_factoryAI_path+'proto/')
 import os
@@ -12,7 +13,6 @@ import trankit.config as conf
 from utils.python.utils import *
 
 
-print('gpu available : ',torch.cuda.is_available())
 
 #tokenizer = NllbTokenizer.from_pretrained("facebook/nllb-200-distilled-600M")
 # tok_path_factoryAI = '../proto_utils/save_dir/HG/'
