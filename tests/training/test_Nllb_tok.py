@@ -10,7 +10,7 @@ from transformers import NllbTokenizer
 from trankit import Pipeline, TPipeline
 import trankit.models.base_models as base_models
 import trankit.config as conf
-from utils.python.utils import *
+# from utils.python.utils import *
 
 
 
