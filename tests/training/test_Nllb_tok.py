@@ -15,10 +15,10 @@ from utils.python.utils import *
 print('gpu available : ',torch.cuda.is_available())
 
 #tokenizer = NllbTokenizer.from_pretrained("facebook/nllb-200-distilled-600M")
-tok_path_factoryAI = '../proto_utils/save_dir/HG/'
-tokenizer = torch.load(tok_path_factoryAI+'proto_utils/nllb_tok.pt')
+# tok_path_factoryAI = '../proto_utils/save_dir/HG/'
+# tokenizer = torch.load(tok_path_factoryAI+'proto_utils/nllb_tok.pt')
 
-print(tokenizer.model_max_length)
+# print(tokenizer.model_max_length)
 
 #my_var = NllbTokenizer.max_len_single_sentence
 
