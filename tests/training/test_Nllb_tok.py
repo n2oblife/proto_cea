@@ -58,6 +58,7 @@ training_config={
     'task': 'posdep', # task name
     'save_dir': '../proto_utils/save_dir', # directory for saving trained model
     'gpu' : torch.cuda.is_available(),
+    'max_epoch':150,
     'train_conllu_fpath': main_factoryAI_path+'proto_utils/datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-train.conllu', # annotations file in CONLLU format  for training
     'dev_conllu_fpath': main_factoryAI_path+'proto_utils/datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-dev.conllu' # annotations file in CONLLU format for development
     }
@@ -67,7 +68,7 @@ trainer = TPipeline(training_config)
 
 trainer.train()
 
-print("---------------- Training DONE ---------------------------t")
+print("---------------- Training DONE ---------------------------")
 
 # treebank = "auto"
 # pipe = Pipeline(lang=treebank)
