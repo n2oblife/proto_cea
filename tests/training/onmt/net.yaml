@@ -1,0 +1,28 @@
+# Meta opts:
+## IO
+save_data: /home/zk274707/Projet/proto_utils/save_dir/test_onmt
+overwrite: True
+
+### vocab:
+src_vocab: wmt17_en_de/vocab.shared
+tgt_vocab: wmt17_en_de/vocab.shared
+src_vocab_size: 36000
+tgt_vocab_size: 36000
+vocab_size_multiple: 8
+src_words_min_frequency: 2
+tgt_words_min_frequency: 2
+share_vocab: True
+n_sample: 0
+
+#### Filter
+src_seq_length: 96
+tgt_seq_length: 96
+
+# Corpus opts:
+data:
+    corpus_1:
+        path_src: /home/zk274707/Projet/datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/
+        path_tgt: /home/zk274707/Projet/datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/
+    valid:
+        path_src: /home/zk274707/Projet/datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/
+        path_tgt: /home/zk274707/Projet/datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/
