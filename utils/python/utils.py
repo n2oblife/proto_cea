@@ -60,3 +60,17 @@ def load_seed():
         torch.cuda.empty_cache()
     except :
         pass
+
+class Device():
+    def __init__(self) -> None:
+        import torch
+        
+        if torch.cuda.is_available():
+            # FactotyAI
+            base_dir = '/home/users/zkanit/'
+        else :
+            # PC
+            base_dir = '/home/zk274707/Projet/proto/'
+        
+        self._base_dir = base_dir
+        

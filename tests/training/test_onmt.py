@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+import sys
+sys.path.append('/home/zk274707/Projet/proto/')
 from utils.python.utils import load_seed
 
 import torch
