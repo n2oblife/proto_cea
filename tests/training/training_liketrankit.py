@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 from utils.python.utils import load_seed
 
 import torch
@@ -21,36 +20,6 @@ from onmt.utils.parse import ArgumentParser
 import onmt.bin.build_vocab as bld_voc
 
 load_seed()
-
-class Config():
-    def __init__(self) -> None:
-        self.input_size = 1024
-        self.heads = 4
-        self.d_ff = 2
-        self.num_layers = 3
-        self.word_vec_size = 600 #to change according to 1.6*sqrt(unique_elts)
-        self.word_vocab_size = 600
-        self.word_padding_idx = 1
-        self.embeddings = modules.Embeddings(
-            word_vec_size=self.word_vec_size,
-            word_vocab_size=self.word_vocab_size,
-            word_padding_idx=self.word_padding_idx
-        )
-        self.max_relative_positions = 0
-        self.dropout = 0.3
-        self.attn_dropout = 0.1
-        self.lr = 0.001
-        self.mometum = 0.9
-        self.num_epoch = 20
-        self.batch_size = 64
-        self.copy_attn = False
-        self.self_attn_type = 'scaled_dot'
-        self.aan_useffn = True
-        self.full_ctxt_alignt = True
-        self.aan_useffn = False
-        self.full_context_alignment = True
-        self.alignment_layer = 1
-        self.alignment_heads = 1
 
 
 def generate_trainer() -> tuple[model.NMTModel, loss.LossCompute, optim.SGD, trainer.Trainer]:
@@ -118,30 +87,3 @@ def generate_trainer() -> tuple[model.NMTModel, loss.LossCompute, optim.SGD, tra
                             )
 
     return net,loss_fn, optimizer, coach
-
-def training() -> None:
-    # training_iter = _build_train_iter(net.opt)
-    # training_steps = 20
-    # net.train(train_iter= training_iter,
-    #           train_steps= training_steps)
-    
-    #sgl.main(opt=net.opt,fields=,transforms_cls=)
-    
-    parser = tr._get_parser()
-    opt, unknown = parser.parse_known_args()
-    tr.train(opt)
-    
-
-
-
-
-
-if __name__ == '__main__':
-    print(f"\n----------------------- Beginning of script -----------------------\n")
-    # print(f"Generating model")
-    generate_trainer()
-    # print(f"Model generated")
-    print(f"Training model")
-    training()
-    print(f"Model trained")
-

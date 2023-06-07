@@ -33,3 +33,30 @@ def adapt_nllb_to_trankit(batch:list) -> list:
             ps += ['-']
     word_lens = [len(x) for x in pieces]
     return word_lens
+
+def load_seed():
+    print('Setting up seed...')
+    seed  = 2147483647
+    # set random seed
+    try :
+        os.environ['PYTHONHASHSEED'] = str(seed)
+    except :
+        pass
+    try :
+        random.seed(seed)
+    except :
+        pass
+    try :
+        np.random.seed(seed)
+    except :
+        pass
+    try :
+        torch.manual_seed(seed)
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
+        # empty cache
+        torch.cuda.empty_cache()
+    except :
+        pass

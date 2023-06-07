@@ -2,9 +2,11 @@ import sys
 main_loc_path = '/home/zk274707/Projet/'
 main_factoryAI_path = '/home/users/zkanit/'
 import torch
+
 print('gpu available : ',torch.cuda.is_available())
-if not(torch.cuda.is_available()) :
+if torch.cuda.is_available() :
     sys.path.insert(1, main_factoryAI_path+'proto/')
+
 import os
 from transformers import NllbTokenizer
 from trankit import Pipeline, TPipeline
@@ -59,8 +61,8 @@ training_config={
     'save_dir': '../proto_utils/save_dir', # directory for saving trained model
     'gpu' : torch.cuda.is_available(),
     'max_epoch':150,
-    'train_conllu_fpath': main_factoryAI_path+'proto_utils/datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-train.conllu', # annotations file in CONLLU format  for training
-    'dev_conllu_fpath': main_factoryAI_path+'proto_utils/datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-dev.conllu' # annotations file in CONLLU format for development
+    'train_conllu_fpath': main_loc_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-train.conllu', # annotations file in CONLLU format  for training
+    'dev_conllu_fpath': main_loc_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-dev.conllu' # annotations file in CONLLU format for development
     }
 
 # # initialize a trainer for the task
