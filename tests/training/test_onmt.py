@@ -44,7 +44,7 @@ class Config():
         self.lr = 0.001
         self.mometum = 0.9
         self.num_epoch = 20
-        self.batch_size = 64
+        self.batch_size = 32
         self.copy_attn = False
         self.self_attn_type = 'scaled_dot'
         self.aan_useffn = True

@@ -3,7 +3,7 @@ from transformers import AutoTokenizer, XLMRobertaModel
 import torch
 from transformers.adapters import XLMRobertaAdapterModel, AutoAdapterModel, BertAdapterModel, AdapterConfig
 
-from torchinfo import summary
+#from torchinfo import summary
 
 print('imported')
 tokenizer = AutoTokenizer.from_pretrained("xlm-roberta-base")
@@ -15,12 +15,17 @@ config = AdapterConfig.load("pfeiffer")
 
 print('model loaded')
 
+sentences = ["Hello, my dog is cute", "Hello, my dog is cute", "Hello, my dog is cute"]
+# input = torch.as_tensor(sentences)
 
-# inputs = tokenizer("Hello, my dog is cute", return_tensors="pt")
-# print(inputs.input_ids.size())
-# print(f'inputs : {inputs}')
-# outputs = model(**inputs)
-# print(f'outputs : {outputs}')
+print(type(input))
+
+inputs = tokenizer(sentences, return_tensors="pt")
+print(inputs.input_ids.size())
+print(f'inputs : {inputs}')
+outputs = model(**inputs, return_tensors="pt")
+print(f'outputs : {outputs}')
+print(f"output type is {type(outputs)}")
 # last_hidden_states = outputs.last_hidden_state
 # print(f"last hidden states : {last_hidden_states}")
 

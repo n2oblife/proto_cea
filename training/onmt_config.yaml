@@ -1,0 +1,62 @@
+# onmt_config.yaml
+
+#IO
+## Where the samples will be written
+save_data: toy-ende/run/example
+## Enables overwriting existing files in the folder
+overwrite: True
+
+### vocab
+## Where the vocab(s) will be written
+src_vocab: toy-ende/run/example.vocab.src
+tgt_vocab: toy-ende/run/example.vocab.tgt
+share_vocab : False
+
+# Corpus opts:
+data:
+    corpus_1:
+        path_src: toy-ende/src-train.txt
+        path_tgt: toy-ende/tgt-train.txt
+    valid:
+        path_src: toy-ende/src-val.txt
+        path_tgt: toy-ende/tgt-val.txt
+
+# Model configuration
+
+
+# Train config
+train_steps: 1000
+valid_steps: 500
+ccum_count: 2
+optim: adamw
+adam_beta1: 0.9
+adam_beta2: 0.998
+decay_method: noam
+learning_rate: 2.0
+max_grad_norm: 0.0
+warmup_steps: 8000
+batch_size: 4096
+batch_type: tokens
+normalization: tokens
+
+# Vocabulary files that were just created
+src_vocab: toy-ende/run/example.vocab.src
+tgt_vocab: toy-ende/run/example.vocab.tgt
+
+# Train on a single GPU (see to change : https://github.com/OpenNMT/OpenNMT-py/blob/master/config/config-transformer-base-4GPU.yml)
+num_workers: 4
+world_size: 1
+gpu_ranks: [0]
+
+# # Train on 4 GPUs
+# world_size: 4
+# gpu_ranks:
+# - 0
+# - 1
+# - 2
+# - 3
+
+# Where to save the checkpoints
+save_model: toy-ende/run/model
+save_checkpoint_steps: 500
+report_every: 100
