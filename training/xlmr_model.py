@@ -57,6 +57,12 @@ class Tok_xlmR(nn.Module):
         self._model.add_classification_head(adapter_name,num_labels, id2label)
     
     def set_active_adapters(self, adapter_name : str) -> None:
+        """Activates the adapters before using or training them, multiple adapters
+        can be activated on top of each others
+
+        Args:
+            adapter_name (str): name of the adapter to activate
+        """
         self._model.train()
         self._model.set_active_adapters(adapter_name)
     
@@ -64,7 +70,17 @@ class Tok_xlmR(nn.Module):
         return self._model.has_adapters()
     
     def save_pretrained(self, path : str) -> None:
+        """Saves the whole model in the path as a .pt from the AdapterHub lib
+
+        Args:
+            path (str): path where to save model
+        """
         self._model.save_pretrained(path)
     
     def save_adapter(self, path : str) -> None :
+        """Saves the adapters in the path as a .pt from the AdapterHub lib
+
+        Args:
+            path (str): path where to save model
+        """
         self._model.save_adapter(path)

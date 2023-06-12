@@ -4,7 +4,30 @@ from onmt.utils.parse import ArgumentParser
 import yaml
 from yaml import SafeLoader, SafeDumper
 
+# save all parameters from the yaml file
 
+class Config():
+    def __init__(self) -> None:
+        self.input_size = 1024
+        self.word_vec_size = 600 #to change according to 1.6*sqrt(unique_elts)
+        self.word_vocab_size = 600
+        self.word_padding_idx = 1
+        self.embeddings = 
+        self.max_relative_positions = 0
+        self.dropout = 0.3
+        self.attn_dropout = 0.1
+        self.lr = 0.001
+        self.mometum = 0.9
+        self.num_epoch = 20
+        self.batch_size = 32
+        self.copy_attn = False
+        self.self_attn_type = 'scaled_dot'
+        self.aan_useffn = True
+        self.full_ctxt_alignt = True
+        self.aan_useffn = False
+        self.full_context_alignment = True
+        self.alignment_layer = 1
+        self.alignment_heads = 1  
 
 def load_default_opt() -> dict :
     parser = tr._get_parser()

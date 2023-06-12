@@ -76,5 +76,4 @@ class Device():
         self._save_dir = base_dir+''
         self._data = base_dir+''
         self._gpu = torch.cuda.is_available()
-        self._
         
