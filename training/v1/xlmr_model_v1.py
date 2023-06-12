@@ -2,7 +2,6 @@ from typing import Any
 import torch
 from transformers import AutoTokenizer, NllbTokenizer
 from transformers.adapters import XLMRobertaAdapterModel, AdapterConfig
-from onmt.encoders.transformer import TransformerEncoder
 
 class Tok_xlmR(nn.Module):
     def __init__(self) -> None:
@@ -41,5 +40,3 @@ class Tok_xlmR(nn.Module):
     
     def save_adapter(self, path : str) -> None :
         self._model.save_adapter(path)
-
-tf_enc = 

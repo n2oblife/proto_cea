@@ -84,6 +84,7 @@ normalization: "tokens"
 
 # Model
 encoder_type: nllb
+decoder_type : xlmr-adapted
 position_encoding: true
 dropout_steps: [0]
 dropout: [0.3]
