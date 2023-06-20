@@ -7,3 +7,4 @@ env_proto
 utils/python/__pycache__
 proto/__pycache__
 trankit.egg-info
+slurm-*.out
