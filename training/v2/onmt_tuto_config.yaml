@@ -100,8 +100,8 @@ decoder_type: xlmr-adapted
 position_encoding: true
 # add src_embeddings ?
 dropout_steps: [0]
-dropout: 0.3
-attention_dropout: 0.1
+dropout: [0.3]
+attention_dropout: [0.1]
 
 # arguments added
 task: posdep
