@@ -30,8 +30,8 @@ class Config():
         self.heads = 4
         self.d_ff = 2
         self.num_layers = 3
-        self.word_vec_size = 600 #to change according to 1.6*sqrt(unique_elts)
-        self.word_vocab_size = 600
+        self.word_vec_size = -1 #to change according to 1.6*sqrt(unique_elts)
+        self.word_vocab_size = -1
         self.word_padding_idx = 1
         self.embeddings = modules.Embeddings(
             word_vec_size=self.word_vec_size,

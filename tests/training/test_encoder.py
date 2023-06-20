@@ -1,7 +1,7 @@
 from torch import tensor
 from transformers import EncoderDecoderModel, NllbTokenizer, T5EncoderModel, T5Config
 # from transformers import EncoderDe
-from transformers.adapters import XLMRobertaAdapterModel 
+from transformers.adapters import XLMRobertaAdapterModel , AdapterConfig
 
 src = tensor([[[   36],
          [   26],
@@ -243,15 +243,24 @@ src = tensor([[[   36],
          [   36],
          [   11]]])
 
-model = XLMRobertaAdapterModel.from_pretrained("xlm-roberta-base")
+# model = XLMRobertaAdapterModel.from_pretrained("xlm-roberta-base")
 
 #enc_dec_mode = EncoderDecoderModel.from_pretrained("facebook/nllb-200-distilled-600M", "xlm-roberta-base", "xlm-roberta-base")
-enc_dec_model_pre = EncoderDecoderModel.from_encoder_decoder_pretrained("facebook/nllb-200-distilled-600M", "xlm-roberta-base")
+# enc_dec_model_pre = EncoderDecoderModel.from_encoder_decoder_pretrained("facebook/nllb-200-distilled-600M", "xlm-roberta-base")
 
 # tokenizer = NllbTokenizer.from_pretrained("facebook/nllb-200-distilled-600M")
 
 # t5_model = T5EncoderModel.from_pretrained("t5-small")
 
-print(model(src))
+# print(model(src))
 
 # print(t5_model(src))
+
+decoder = XLMRobertaAdapterModel.from_pretrained("xlm-roberta-base")
+adapter_config = AdapterConfig.load("pfeiffer")
+decoder.add_adapter("posdep_english_adapter_decoder",adapter_config)
+decoder.train()
+decoder.set_active_adapters("posdep_english_adapter_decoder")
+
+print(decoder(src))
+print(decoder(src).last_hidden_state)

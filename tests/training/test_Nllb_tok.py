@@ -8,15 +8,31 @@ if torch.cuda.is_available() :
     sys.path.insert(1, main_factoryAI_path+'proto/')
 
 import os
-from transformers import NllbTokenizer
+import torch.nn as nn
+from transformers import NllbTokenizer, XLMRobertaTokenizer, XLMRobertaModel
 from trankit import Pipeline, TPipeline
 import trankit.models.base_models as base_models
 import trankit.config as conf
 # from utils.python.utils import *
 
 
+tokenizer = XLMRobertaTokenizer.from_pretrained("xlm-roberta-base")
+xlm = XLMRobertaModel.from_pretrained("xlm-roberta-base")
+dropout = nn.Dropout(p=0.8)
 
-#tokenizer = NllbTokenizer.from_pretrained("facebook/nllb-200-distilled-600M")
+batch_sentences_list = ["Hello I'm a single sentence.", "And another sentence.", "And the very very last one"]
+batch_sentences_str = "Hello I'm a single sentence. And another sentence. And the very very last one"
+
+encoded = tokenizer(batch_sentences_list, 
+                    return_tensors='pt',
+                    add_special_tokens=True,
+                    truncation=True,
+                    padding=True) # possibilité de mettre le padding au max
+embedded = xlm(encoded['input_ids'], attention_mask = encoded['attention_mask'])
+print(embedded[0].size())
+print(embedded[0][:, 0, :].unsqueeze(1).size())
+
+# tokenizer = NllbTokenizer.from_pretrained("facebook/nllb-200-distilled-600M")
 # tok_path_factoryAI = '../proto_utils/save_dir/HG/'
 # tokenizer = torch.load(tok_path_factoryAI+'proto_utils/nllb_tok.pt')
 
@@ -25,10 +41,17 @@ import trankit.config as conf
 #my_var = NllbTokenizer.max_len_single_sentence
 
 
-batch_sentences_list = ["Hello I'm a single sentence.", "And another sentence.", "And the very very last one"]
-batch_sentences_str = "Hello I'm a single sentence. And another sentence. And the very very last one"
-# tokenized = tokenizer()
+# # tokenized = tokenizer()
 # docu = tokenizer(batch_sentences_list, padding = 'max_length')
+# output = tokenizer.encode(batch_sentences_str,                
+#                         #   add_special_tokens=True,
+#                         #   max_length=204,
+#                         #   truncation=True
+#                           )
+# tokenized = tokenizer.tokenize('bonjour, comment va ?')
+# print(output)
+# print(docu)
+# print(output)
 
 # docu.wordl_lens = adapt_nllb_to_trankit(docu)
 
@@ -54,23 +77,24 @@ batch_sentences_str = "Hello I'm a single sentence. And another sentence. And th
 
 # = torch.tensor(docu) # need to use the get tagger from the base model and ecode_words function
 
+# Beginning of training ------------------------
 
-training_config={
-    'category': 'customized', # pipeline category
-    'task': 'posdep', # task name
-    'save_dir': '../proto_utils/save_dir', # directory for saving trained model
-    'gpu' : torch.cuda.is_available(),
-    'max_epoch':150,
-    'train_conllu_fpath': main_loc_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-train.conllu', # annotations file in CONLLU format  for training
-    'dev_conllu_fpath': main_loc_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-dev.conllu' # annotations file in CONLLU format for development
-    }
+# training_config={
+#     'category': 'customized', # pipeline category
+#     'task': 'posdep', # task name
+#     'save_dir': '../proto_utils/save_dir', # directory for saving trained model
+#     'gpu' : torch.cuda.is_available(),
+#     'max_epoch':150,
+#     'train_conllu_fpath': main_loc_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-train.conllu', # annotations file in CONLLU format  for training
+#     'dev_conllu_fpath': main_loc_path+'datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-dev.conllu' # annotations file in CONLLU format for development
+#     }
 
-# # initialize a trainer for the task
-trainer = TPipeline(training_config)
+# # # initialize a trainer for the task
+# trainer = TPipeline(training_config)
 
-trainer.train()
+# trainer.train()
 
-print("---------------- Training DONE ---------------------------")
+# print("---------------- Training DONE ---------------------------")
 
 # treebank = "auto"
 # pipe = Pipeline(lang=treebank)

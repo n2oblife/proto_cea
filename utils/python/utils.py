@@ -75,5 +75,5 @@ class Device():
         self._base_dir = base_dir
         self._save_dir = base_dir+''
         self._data = base_dir+''
-        self._gpu = torch.cuda.is_available()
+        self._gpu = torch.cuda.is_available()training/v1/onmt_tuto_config.yamltraining/v1/onmt_tuto_config.yaml
         
