@@ -10,14 +10,15 @@ if torch.cuda.is_available() :
 import os
 import torch.nn as nn
 from transformers import NllbTokenizer, XLMRobertaTokenizer, XLMRobertaModel
+from transformers.adapters import XLMRobertaAdapterModel
 from trankit import Pipeline, TPipeline
 import trankit.models.base_models as base_models
 import trankit.config as conf
 # from utils.python.utils import *
 
 
-tokenizer = XLMRobertaTokenizer.from_pretrained("xlm-roberta-base")
-xlm = XLMRobertaModel.from_pretrained("xlm-roberta-base")
+# tokenizer = XLMRobertaTokenizer.from_pretrained("xlm-roberta-base")
+xlm = XLMRobertaAdapterModel.from_pretrained("xlm-roberta-base")
 dropout = nn.Dropout(p=0.8)
 
 batch_sentences_list = ["Hello I'm a single sentence.", "And another sentence.", "And the very very last one"]
