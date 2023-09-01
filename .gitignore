@@ -4,6 +4,7 @@ build
 cache
 dist
 env_proto
+!env_proto/lib/python3.10/site-packages/ctranslate2
 utils/python/__pycache__
 proto/__pycache__
 trankit.egg-info

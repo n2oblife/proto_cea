@@ -2,16 +2,16 @@
 
 # Where to save the log file and the output models/checkpoints
 # log_file:  /home/users/zkanit/proto_utils/save_dir/xlmr_models/out.log
-log_file: /home/zk274707/Projet/proto_utils/save_dir/xlmr_models/out.log
-save_model:  onmt_v2 
+log_file: /home/zk274707/projet_final/save_dir/out.log
+save_model:  /home/zk274707/projet_final/save_dir/xlmr_models/
 
 #Training info
-exp: onmt_v2-deprel
+exp: onmt_final-deprel
 seed: 1234 # aligned to the trankit's seed
 
 ## Where the samples will be written, saved as <save_model>_N.pt
 # save_data: /home/users/zkanit/proto_utils/save_dir/xlmr_models/
-save_data: /home/zk274707/Projet/proto_utils/save_dir/xlmr_models/
+save_data: /home/zk274707/projet_final/save_dir/xlmr_models/
 
 # Training files
 data:
@@ -37,12 +37,12 @@ src_vocab: /home/zk274707/Projet/datasets/ud-treebanks-v2.10-trainable/UD_Englis
 tgt_vocab: /home/zk274707/Projet/datasets/ud-treebanks-v2.10-trainable/UD_English-EWT/en_ewt-ud-dev_tgt_onmt.vocab.txt
 
 # Vocabulary size - should be the same as in sentence piece
-src_vocab_size: 50000
-tgt_vocab_size: 50000
+# src_vocab_size: 50000
+# tgt_vocab_size: 50000
 
 # Filter out source/target longer than n if [filtertoolong] enabled
-src_seq_length: 150
-src_seq_length: 150
+# src_seq_length: 150
+# src_seq_length: 150
 
 # Embeddings option
 #src_embeddings: /home/users/zkanit/proto_utils/save_dir/HG/nllb_tok.pt
@@ -50,14 +50,14 @@ src_seq_length: 150
 # Tokenization options
 # src_subword_model: /home/users/zkanit/proto_utils/save_dir/HG/nllb_tok.pt
 #tgt_subword_model: /home/users/zkanit/proto_utils/save_dir/HG/nllb_tok.pt
-src_subword_model: /home/zk274707/Projet/proto_utils/save_dir/HG/nllb_tok.pt
+# src_subword_model: /home/zk274707/Projet/proto_utils/save_dir/HG/nllb_tok.pt
 
 
 # Stop training if it does not improve after n validations
 early_stopping: 10
 
 # Default: 5000 - Save a model checkpoint for each n
-save_checkpoint_steps: 1000
+save_checkpoint_steps: 10000
 
 # To save space, limit checkpoints to last n
 # keep_checkpoint: 3
@@ -66,13 +66,18 @@ save_checkpoint_steps: 1000
 # Default: 100000 - Train the model to max n steps 
 # Increase to 200000 or more for large datasets
 # For fine-tuning, add up the required steps to the original steps
-train_steps: 100000
+train_steps: 150000
 
 # Default: 10000 - Run validation after n steps
-valid_steps: 1000
+valid_steps: 10000
+
+# Metrics for training and validation
+# available :  BLEU, TER, L2LOSS, ACC, CELOSS, POSDEP(from trankit incoming)
+# train_metrics: ['BLEU']
+# valid_metrics: ['BLEU']
 
 # Default: 4000 - for large datasets, try up to 8000
-report_every: 100
+report_every: 6000
 
 # Number of GPUs, and IDs of GPUs
 # world_size: 1
@@ -80,12 +85,12 @@ report_every: 100
 
 # Batching
 bucket_size: 262144
-num_workers: 0  # Default: 2, set to 0 when RAM out of memory
+num_workers: 2  # Default: 2, set to 0 when RAM out of memory
 batch_type: "sents"
 batch_size: 16   # Tokens per batch, change when CUDA out of memory
 valid_batch_size: 16
 max_generator_batches: 2
-accum_count: 4
+accum_count: 4 # accumulation dans un batch de batches
 accum_steps: 0
 
 # Optimization
@@ -117,3 +122,4 @@ trankit: True
 task: posdep
 embedding_name: xlm-roberta-base
 treebank_name: english
+max_epoch: 50
